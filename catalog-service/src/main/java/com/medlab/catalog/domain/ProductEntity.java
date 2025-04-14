@@ -4,14 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jdk.jfr.Enabled;
+import java.math.BigDecimal;
 import org.springframework.data.annotation.Id;
 
-import java.math.BigDecimal;
-
-@Enabled
+@Entity
 @Table(name = "products")
-public class ProductEntity {
+class ProductEntity {
+    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_id_generator")
     @SequenceGenerator(name = "product_id_generator", sequenceName = "product_id_seq")

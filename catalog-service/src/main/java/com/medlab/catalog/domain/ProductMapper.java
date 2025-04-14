@@ -1,6 +1,6 @@
 package com.medlab.catalog.domain;
 
-public class ProductMapper {
+class ProductMapper {
     static Product toProduct(ProductEntity productEntity) {
         return new Product(
                 productEntity.getCode(),

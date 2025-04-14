@@ -1,5 +1,7 @@
 package com.medlab.catalog.domain;
 
+import com.medlab.catalog.ApplicationProperties;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -11,18 +13,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ApplicationProperties applicationProperties;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ApplicationProperties applicationProperties) {
         this.productRepository = productRepository;
+        this.applicationProperties = applicationProperties;
     }
 
-    public PagedResult<Product> getProducts(int pageNo){
+    public PagedResult<Product> getProducts(int pageNo) {
         Sort sort = Sort.by("name").ascending();
         pageNo = pageNo <= 1 ? 0 : pageNo - 1;
-        Pageable pageable = PageRequest.of(pageNo, 10, sort);
-        Page<Product> productsPage = productRepository
-                                     .findAll(pageable)
-                                     .map(ProductMapper::toProduct);
+        Pageable pageable = PageRequest.of(pageNo, applicationProperties.PageSize(), sort);
+        Page<Product> productsPage = productRepository.findAll(pageable).map(ProductMapper::toProduct);
 
         return new PagedResult<>(
                 productsPage.getContent(),
@@ -32,7 +34,10 @@ public class ProductService {
                 productsPage.isFirst(),
                 productsPage.isLast(),
                 productsPage.hasNext(),
-                productsPage.hasPrevious()
-        );
+                productsPage.hasPrevious());
+    }
+
+    public Optional<Product> getProductByCode(String code) {
+        return productRepository.findByCode(code).map(ProductMapper::toProduct);
     }
 }
