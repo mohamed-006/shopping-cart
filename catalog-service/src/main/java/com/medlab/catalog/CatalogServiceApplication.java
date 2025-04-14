@@ -1,4 +1,4 @@
-package com.medlab.catalog_service;
+package com.medlab.catalog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

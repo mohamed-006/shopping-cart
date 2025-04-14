@@ -1,5 +1,6 @@
 package com.medlab.catalog_service;
 
+import com.medlab.catalog.CatalogServiceApplication;
 import org.springframework.boot.SpringApplication;
 
 public class TestCatalogServiceApplication {
