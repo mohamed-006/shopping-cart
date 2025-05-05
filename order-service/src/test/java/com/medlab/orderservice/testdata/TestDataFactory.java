@@ -1,7 +1,4 @@
 package com.medlab.orderservice.testdata;
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.Set;
 
 import static org.instancio.Select.field;
 
@@ -9,6 +6,9 @@ import com.medlab.orderservice.domain.model.Address;
 import com.medlab.orderservice.domain.model.CreateOrderRequest;
 import com.medlab.orderservice.domain.model.Customer;
 import com.medlab.orderservice.domain.model.OrderItem;
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Set;
 import org.instancio.Instancio;
 
 public class TestDataFactory {
